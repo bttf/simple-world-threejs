@@ -28,7 +28,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 options: {
-                    open: true,
+                    // open: true,
                     base: [ base ]
                 }
             }
@@ -49,13 +49,13 @@ module.exports = function(grunt) {
                 files: [
                     '<%= jshint.all %>'
                 ],
-                tasks: ['jshint']
+                // tasks: ['jshint']
             },
             json: {
                 files: [
                     '{package,bower}.json'
                 ],
-                tasks: ['jsonlint']
+                // tasks: ['jsonlint']
             },
             // Live reload
             reload: {
