@@ -14,14 +14,7 @@
     camera.position.z = 100;
 
     // floor
-    geometry = new THREE.PlaneGeometry(2000, 2000, 5, 5);
-    geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI/2));
-    var texture = THREE.ImageUtils.loadTexture('textures/desert.jpg');
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(512, 512);
-    material = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture });
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    scene.add(createFloor());
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -32,5 +25,15 @@
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+  }
+
+  function createFloor() {
+    geometry = new THREE.PlaneGeometry(2000, 2000, 5, 5);
+    geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI/2));
+    var texture = THREE.ImageUtils.loadTexture('textures/desert.jpg');
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(256, 256);
+    material = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture });
+    return new THREE.Mesh(geometry, material);
   }
 })();
