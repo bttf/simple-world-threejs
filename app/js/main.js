@@ -10,6 +10,7 @@
       moveRight,
       canJump;
   var velocity = new THREE.Vector3();
+  var footStepSfx = new Audio('/sfx/footstep.wav');
 
   init();
   animate();
@@ -17,6 +18,9 @@
   function init() {
     initControls();
     initPointerLock();
+
+    footStepSfx.preload = 'auto';
+    //footStepSfx.loop = true;
 
     clock = new THREE.Clock();
 
@@ -150,16 +154,21 @@
   function updateControls() {
     if (controlsEnabled) {
       var delta = clock.getDelta();
+      var walkingSpeed = 200.0;
 
       velocity.x -= velocity.x * 10.0 * delta;
       velocity.z -= velocity.z * 10.0 * delta;
       velocity.y -= 9.8 * 100.0 * delta;
 
-      if (moveForward) velocity.z -= 400.0 * delta;
-      if (moveBackward) velocity.z += 400.0 * delta;
+      if (moveForward) velocity.z -= walkingSpeed * delta;
+      if (moveBackward) velocity.z += walkingSpeed * delta;
 
-      if (moveLeft) velocity.x -= 400.0 * delta;
-      if (moveRight) velocity.x += 400.0 * delta;
+      if (moveLeft) velocity.x -= walkingSpeed * delta;
+      if (moveRight) velocity.x += walkingSpeed * delta;
+
+      if (moveForward || moveBackward || moveLeft || moveRight) {
+        footStepSfx.play();
+      } 
 
       controls.getObject().translateX(velocity.x * delta);
       controls.getObject().translateY(velocity.y * delta);
