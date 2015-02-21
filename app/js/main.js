@@ -12,13 +12,10 @@
     camera.position.z = 100;
 
     // floor
-    var geometry = new THREE.PlaneGeometry(2000, 2000, 100, 100);
+    geometry = new THREE.PlaneGeometry(2000, 2000, 5, 5);
     geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI/2));
     for (var i = 0, l = geometry.faces.length; i < l; i ++) {
-      var face = geometry.faces[i];
-      face.vertexColors[ 0 ] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-      face.vertexColors[ 1 ] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-      face.vertexColors[ 2 ] = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
+      geometry.faces[i].color = new THREE.Color().setHSL(Math.random(), 1, 0.5);
     }
     material = new THREE.MeshBasicMaterial({vertexColors: THREE.VertexColors});
     mesh = new THREE.Mesh(geometry, material);
