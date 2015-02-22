@@ -11,6 +11,9 @@
       canJump;
   var velocity = new THREE.Vector3();
   var footStepSfx = new Audio('/sfx/footstep.wav');
+  var ambienceSfx = new Audio('/sfx/ambience.wav');
+  ambienceSfx.preload = 'auto';
+  ambienceSfx.loop = true;
 
   init();
   animate();
@@ -19,13 +22,14 @@
     initControls();
     initPointerLock();
 
+    ambienceSfx.play();
     footStepSfx.preload = 'auto';
     //footStepSfx.loop = true;
 
     clock = new THREE.Clock();
 
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xffffff, 0, 750);
+    scene.fog = new THREE.Fog(0xb2e1f2, 0, 750);
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.y = 10;
